@@ -1,0 +1,610 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --android-green: #3DDC84;
+  --android-green-dark: #2da160;
+  --android-navy: #073042;
+  --soft-bg: #F8F9FA;
+  --card-bg: #ffffff;
+  --text-primary: #073042;
+  --text-secondary: #5f6368;
+  --border-color: #e0e0e0;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.1);
+  --radius: 16px;
+  --sidebar-bg: #ffffff;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme='dark'] {
+  --soft-bg: #03141c;
+  --card-bg: #072a3a;
+  --sidebar-bg: #051a26;
+  --text-primary: #f8f9fa;
+  --text-secondary: #a0aec0;
+  --border-color: #1a3a4a;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--soft-bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+}
+
+.app-layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 300px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border-color);
+  padding: 30px 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+
+.sidebar-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-item {
+  padding: 12px 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  border: 1px solid transparent;
+  background: transparent;
+  width: 100%;
+}
+
+.sidebar-item:hover {
+  background: var(--soft-bg);
+  color: var(--android-navy);
+}
+
+.sidebar-item.active {
+  background: #E7FBF1;
+  color: var(--android-green-dark);
+  border-color: rgba(61, 220, 132, 0.2);
+}
+
+.sidebar-item.completed {
+  border-left: 4px solid var(--android-green);
+}
+
+.sidebar-item.completed:not(.active) {
+  background: rgba(61, 220, 132, 0.03);
+}
+
+.section-indicator {
+  width: 12px;
+  height: 2px;
+  background: var(--border-color);
+  transition: all 0.3s;
+}
+
+.active .section-indicator {
+  width: 20px;
+  background: var(--android-green);
+}
+
+/* Updated Container Styles */
+.container {
+  flex: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 60px 40px;
+}
+
+@media (max-width: 1100px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+header {
+  text-align: left;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.android-logo {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 12px;
+  color: var(--android-green);
+}
+
+h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+section {
+  margin-bottom: 100px;
+  scroll-margin-top: 40px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 40px;
+  padding: 24px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.section-stats-detail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  width: 100%;
+}
+
+.stats-track {
+  width: 120px;
+  height: 6px;
+  background: var(--border-color);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.stats-fill {
+  height: 100%;
+  background: var(--android-green);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.question-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 30px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+.question-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.question-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+
+.question-id {
+  background: var(--android-green);
+  color: white;
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border-radius: 8px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+}
+
+.input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .input-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--android-green);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+textarea {
+  width: 100%;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 120px;
+  transition: var(--transition);
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--android-green);
+  box-shadow: 0 0 0 4px rgba(61, 220, 132, 0.1);
+}
+
+/* AI Verification Styles */
+.ai-verify-container {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--border-color);
+}
+
+.verify-btn {
+  background: var(--android-navy);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.verify-btn:hover:not(:disabled) {
+  background: var(--android-green-dark);
+}
+
+.verify-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ai-feedback {
+  margin-top: 15px;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(61, 220, 132, 0.08);
+  border-left: 4px solid var(--android-green);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.markdown-content {
+  margin-top: 12px;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3 {
+  margin: 15px 0 10px;
+  color: var(--android-green);
+}
+
+.markdown-content h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.markdown-content li {
+  margin-bottom: 5px;
+}
+
+.markdown-content p {
+  margin-bottom: 10px;
+}
+
+.markdown-content blockquote {
+  border-left: 4px solid var(--android-green);
+  padding: 15px 20px;
+  margin: 20px 0;
+  color: var(--text-primary);
+  font-style: italic;
+  background: rgba(61, 220, 132, 0.05);
+  border-radius: 0 12px 12px 0;
+  opacity: 0.9;
+}
+
+.markdown-content strong {
+  color: var(--android-green);
+  font-weight: 700;
+}
+
+.ai-feedback.error {
+  background: rgba(244, 67, 54, 0.1);
+  border-left-color: #f44336;
+  color: #ff8a80;
+}
+
+.api-key-config {
+  background: var(--card-bg);
+  padding: 24px;
+  border-radius: var(--radius);
+  margin-bottom: 40px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  max-width: 600px;
+}
+
+.api-key-config h3 {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.api-key-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--soft-bg);
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  font-family: monospace;
+}
+
+.api-key-note {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.nav-dots {
+  position: fixed;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 100;
+}
+
+@media (max-width: 1400px) {
+  .nav-dots {
+    display: none;
+  }
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border-color);
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.dot.active {
+  background: var(--android-green);
+  transform: scale(1.4);
+}
+
+.dot::after {
+  content: attr(data-label);
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--card-bg);
+  color: var(--text-primary);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+
+.dot:hover::after {
+  opacity: 1;
+}
+
+.history-select {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: var(--transition);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%233DDC84' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.history-select:hover {
+  border-color: var(--android-green);
+  background-color: #f0fff4;
+}
+
+.history-select:focus {
+  border-color: var(--android-green);
+  box-shadow: 0 0 0 3px rgba(61, 220, 132, 0.1);
+}
+
+.history-tag {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 2px;
+  opacity: 0.8;
+}
+
+.ai-verify-actions {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 40px;
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+.history-section {
+  flex: 1;
+  min-width: 0;
+  border-left: 2px solid var(--soft-bg);
+  padding-left: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.history-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+footer {
+  text-align: center;
+  padding: 60px 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--border-color);
+  margin-top: 40px;
+}
+
+.theme-toggle {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.theme-toggle:hover {
+  transform: rotate(15deg) scale(1.1);
+  border-color: var(--android-green);
+  color: var(--android-green);
+  box-shadow: var(--shadow-hover);
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 6px;
+  background: var(--android-green);
+  z-index: 1000;
+  transition: width 0.3s ease;
+}
