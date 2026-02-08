@@ -210,7 +210,7 @@ function App() {
 
       <aside className={`sidebar ${showMobileMenu ? 'mobile-open' : ''}`}>
         <div className="sidebar-title">
-          <img src="/assets/logo.png" alt="Logo" style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
+          <img src="./assets/logo.png" alt="Logo" style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
           <span>Navigasyon</span>
         </div>
         <nav className="sidebar-nav">
@@ -268,7 +268,7 @@ function App() {
                 <Menu size={24} />
               </button>
               <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                <img src="/assets/logo.png" className="header-logo" alt="Android Interview Master Logo" style={{ objectFit: 'contain' }} />
+                <img src="./assets/logo.png" className="header-logo" alt="Android Interview Master Logo" style={{ objectFit: 'contain' }} />
                 <div>
                   <h1 className="header-title">Android Mülakat Uzmanı</h1>
                   <p className="subtitle">Modern Mülakat Hazırlık ve Vaka Çalışması</p>
