@@ -7,7 +7,7 @@ Android Mülakat Uzmanı, Android geliştiricileri için modern mülakat hazırl
 ## ✨ Özellikler
 
 - 📱 **270+ Profesyonel Soru:** Core Android, Lifecycle, UI/Compose, Networking ve daha birçok kategoride güncel mülakat soruları.
-- 🤖 **Yapay Zeka (Gemini 2.0 Flash) Entegrasyonu:** Cevaplarınızı gerçek zamanlı olarak değerlendiren ve size "Expert" seviyesinde geri bildirim veren AI asistanı.
+- 🤖 **Yapay Zeka (Gemini 3.0 Flash Preview) Entegrasyonu:** Cevaplarınızı gerçek zamanlı olarak değerlendiren ve size "Expert" seviyesinde geri bildirim veren AI asistanı.
 - 🌍 **Çift Dilli Hazırlık:** Soruları hem Türkçe hem de İngilizce cevaplayabilme ve mülakat diline uygun analiz alma imkanı.
 - 🎓 **Seviyeye Göre Geri Bildirim:** Junior, Mid-level veya Senior seviyelerinden kendinize uygun olanı seçin, AI size o seviyenin beklentilerine göre yanıt versin.
 - 🕒 **Analiz Geçmişi:** Geçmişte yaptığınız analizleri kaydedin ve dropdown menü üzerinden dilediğiniz zaman tekrar inceleyin.
@@ -19,7 +19,7 @@ Android Mülakat Uzmanı, Android geliştiricileri için modern mülakat hazırl
 - **Frontend:** React, Vite
 - **Animasyonlar:** Framer Motion
 - **İkonlar:** Lucide React
-- **Yapay Zeka:** Google Gemini AI API (`gemini-2.0-flash`)
+- **Yapay Zeka:** Google Gemini AI API (`gemini-3-flash-preview`)
 - **Stil:** Modern CSS Custom Properties & Glassmorphism
 
 ## 🛠️ Kurulum ve Çalıştırma
