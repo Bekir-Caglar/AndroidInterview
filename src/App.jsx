@@ -55,6 +55,7 @@ function App() {
   const [aiFeedback, setAiFeedback] = useState({}); // Current selected feedback ID mapping
   const [loading, setLoading] = useState({});
   const [activeSection, setActiveSection] = useState(questionData[0].section);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -207,7 +208,7 @@ function App() {
     <div className="app-layout">
       <motion.div className="progress-bar" style={{ scaleX }} />
 
-      <aside className="sidebar">
+      <aside className={`sidebar ${showMobileMenu ? 'mobile-open' : ''}`}>
         <div className="sidebar-title">
           <img src="/assets/logo.png" alt="Logo" style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
           <span>Navigasyon</span>
@@ -219,7 +220,10 @@ function App() {
               <button
                 key={idx}
                 className={`sidebar-item ${activeSection === section.section ? 'active' : ''} ${stats.allDone ? 'completed' : ''}`}
-                onClick={() => scrollToSection(section.section)}
+                onClick={() => {
+                  scrollToSection(section.section);
+                  setShowMobileMenu(false);
+                }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <SectionIcon section={section.section} />
@@ -235,6 +239,10 @@ function App() {
           })}
         </nav>
       </aside>
+
+      {showMobileMenu && (
+        <div className="mobile-overlay" onClick={() => setShowMobileMenu(false)} />
+      )}
 
       <div className="nav-dots">
         {questionData.map((section, idx) => (
@@ -255,11 +263,16 @@ function App() {
             transition={{ duration: 0.6 }}
             style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
-              <img src="/assets/logo.png" alt="Android Interview Master Logo" style={{ width: '100px', height: '100px', objectFit: 'contain' }} />
-              <div>
-                <h1 style={{ marginBottom: '5px' }}>Android Mülakat Uzmanı</h1>
-                <p className="subtitle">Modern Mülakat Hazırlık ve Vaka Çalışması</p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+              <button className="mobile-menu-toggle" onClick={() => setShowMobileMenu(true)}>
+                <Menu size={24} />
+              </button>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                <img src="/assets/logo.png" className="header-logo" alt="Android Interview Master Logo" style={{ objectFit: 'contain' }} />
+                <div>
+                  <h1 className="header-title">Android Mülakat Uzmanı</h1>
+                  <p className="subtitle">Modern Mülakat Hazırlık ve Vaka Çalışması</p>
+                </div>
               </div>
             </div>
 
@@ -281,7 +294,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
           >
             <h3><Key size={18} style={{ verticalAlign: 'middle', marginRight: '8px' }} /> AI Konfigürasyonu</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '15px', marginBottom: '15px' }}>
+            <div className="config-grid">
               <div className="input-group">
                 <label style={{ fontSize: '0.7rem' }}>API Anahtarı</label>
                 <input
