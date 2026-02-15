@@ -16,6 +16,15 @@ const SectionIcon = ({ section }) => {
   return <BookOpen size={18} />;
 };
 
+const questionDisplayIndexMap = new Map();
+let globalDisplayCounter = 1;
+
+questionData.forEach(section => {
+  section.questions.forEach(q => {
+    questionDisplayIndexMap.set(q.id, globalDisplayCounter++);
+  });
+});
+
 function App() {
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('android_theme') || 'light';
@@ -379,7 +388,7 @@ function App() {
                     transition={{ duration: 0.4 }}
                   >
                     <div className="question-text">
-                      <span className="question-id">{q.id}</span>
+                      <span className="question-id">{questionDisplayIndexMap.get(q.id)}</span>
                       {q.question}
                       {(answers[q.id]?.tr?.trim() || answers[q.id]?.en?.trim()) && (
                         <CheckCircle2 size={18} color="var(--android-green)" style={{ marginLeft: 'auto' }} />
